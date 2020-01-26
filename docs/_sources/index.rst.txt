@@ -1,0 +1,26 @@
+.. ComputerConversation documentation master file, created by
+   sphinx-quickstart on Tue Jan 21 22:24:59 2020.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+ComputerConversation's Documentation!
+================================================
+
+:Student: Craig Smith
+:Week-2: Conversation with a Computer Assignment
+:Course: CMIT-135-40D (Champlain College)
+:Professor: Steve Giles
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   rst/ComputerConversation
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

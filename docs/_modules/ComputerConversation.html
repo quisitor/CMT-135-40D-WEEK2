@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>ComputerConversation &#8212; ComputerConversation 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ComputerConversation 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ComputerConversation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">:Student: Craig Smith</span>
+<span class="sd">:Week-2: Conversation with a Computer Assignment</span>
+<span class="sd">:Course: CMIT-135-40D (Champlain College)</span>
+<span class="sd">:Professor: Steve Giles</span>
+
+<span class="sd">Purpose</span>
+<span class="sd">-------</span>
+<span class="sd">This module generates an interactive computer-driven conversation utilizing</span>
+<span class="sd">one of four random personalities and basic user terminal input.</span>
+
+<span class="sd">Constraints</span>
+<span class="sd">-----------</span>
+<span class="sd">1. Minimum of 4 unique inputs from the user</span>
+<span class="sd">2. Inputs must consist of numeric and alphanumeric responses</span>
+<span class="sd">3. The conversation-bot must utilize 3 of the user inputs as part of its responses</span>
+<span class="sd">4. The bot must perform some type of arithmetic operation on the inputs</span>
+<span class="sd">5. The program must include explanatory comments</span>
+<span class="sd">6. Student must turn in the .py file and a screenshot of the application in use</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Personalities</span>
+<span class="c1"># 1. Alien Responses</span>
+<span class="c1"># 2. Country Responses</span>
+<span class="c1"># 3. Surfer Responses</span>
+<span class="c1"># 4. Dungeon Master Responses</span>
+
+
+<span class="c1"># Constants</span>
+<span class="n">GREETINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello earthling, which way to your leader? North, South, East, or West: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;Howdy partner, my horse is all tuckered. Which way you heading? &#39;</span>
+               <span class="s1">&#39;North, South, East, or West: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;Dude.... Like hi and stuff. Which way to the gnarliest waves? &#39;</span>
+              <span class="s1">&#39;North, South, East, or West: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;Greetings brave traveler. You have entered the layer of Malcibot.</span><span class="se">\n</span><span class="s1">&#39;</span>
+          <span class="s1">&#39;You are surrounded by four doors. Choose North, South, East, or West: &#39;</span>
+<span class="p">}</span>
+
+<span class="n">FIRST_RESPONSE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;is what I was thinking. Thank you human. I shall head that way to &#39;</span>
+             <span class="s1">&#39;meet with your leader.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s2">&quot;like a migrating possum. That is what I was thinking. There&#39;s a &quot;</span>
+               <span class="s2">&quot;watering-hole that way.&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;is a most bodacious choice. Thanks for your tip.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;door sticks at first, but slowly swings open after some additional &#39;</span>
+          <span class="s1">&#39;effort on your part.</span><span class="se">\n</span><span class="s1">You see a chest on the far end of the room. &#39;</span>
+<span class="p">}</span>
+
+<span class="n">SECOND_QUERY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;Human, before I traverse, what year is it in &quot;Earth Years&quot;: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;You are kinda cute. How many years under your hat do you have: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;You look like you have seen many waves in your day. How many years&#39;</span>
+              <span class="s1">&#39; have you been hitting the surf: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;You walk to the chest and inspect it. You see a combination lock with &#39;</span>
+          <span class="s1">&#39;with three dials each containing the numbers 0 to 9. Above the lock &#39;</span>
+          <span class="s1">&#39;you see a runic inscription. You consult your memory and work out its&#39;</span>
+          <span class="s1">&#39; meaning. &quot;Pythagoras.&quot; You must enter a three digit number corresponding &#39;</span>
+          <span class="s1">&#39;to the settings of the dials to open the lock and reap the rewards: &#39;</span>
+<span class="p">}</span>
+
+
+<span class="n">SECOND_RESPONSE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s2">&quot; will be the future date of our conquest of your planet.&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39; more years until you catch up to me.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39; years for me. Righteous! Rock on with your bad self!&#39;</span>
+<span class="p">}</span>
+
+<span class="n">THIRD_QUERY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;Puny earthling, does knowing this make you happy or sad: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s wrong, does this news make you happy or sad: &quot;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;Whoa! Mix vibes dude. You like happy or sad about this: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;Thus is the luck of many adventurers. You glance around and see a &#39;</span>
+          <span class="s1">&#39;runic symbol above a passage-way that looks to be some type of face. Is&#39;</span>
+          <span class="s1">&#39; this face happy or sad: &#39;</span>
+<span class="p">}</span>
+
+<span class="n">THIRD_RESPONSE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;is an interesting emotion. We do not have an equivalent word on my planet.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;is understandable. Many partners may feel that way in this situation.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;. I get ya. I feel that way on occasion also.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;is correct. The passage way begins to glow with a brilliant white light.&#39;</span>
+<span class="p">}</span>
+
+<span class="n">FOURTH_QUERY</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;Humanoid, would you like to come with me to visit your leader: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;Unfortunately my friend, I have to go. You want to tag along: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;Well fellow peop, I gotta go ride a tube. Want to come: &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;Through the light you see the face of a long forgotten wizard. Do you wish&#39;</span>
+          <span class="s1">&#39; to ask a boon of him: &#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Helper Functions</span>
+<div class="viewcode-block" id="input_validator"><a class="viewcode-back" href="../_rst/ComputerConversation.html#ComputerConversation.input_validator">[docs]</a><span class="k">def</span> <span class="nf">input_validator</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">iferror</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes the user response and chosen personality to and for the</span>
+<span class="sd">    first_query and validates the user input against the choices list. The function</span>
+<span class="sd">    will prompt the user for the correct input with the message in the &quot;iferror&quot;</span>
+<span class="sd">    until the user returns a correct answer.</span>
+
+<span class="sd">    :parameter: **person** string, valid values are &#39;alien&#39;, &#39;country&#39;, &#39;surfer&#39;, &#39;dm&#39;</span>
+<span class="sd">    :parameter: **answer** String representing the user response to the query</span>
+<span class="sd">    :parameter: **choices** list of acceptable strings to compare to the answer</span>
+<span class="sd">    :parameter: **iferror** string to prompt the user for correct input</span>
+<span class="sd">    :returns: **list** list containing the validated answer and personality</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">person</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;alien&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;surfer&#39;</span><span class="p">,</span> <span class="s1">&#39;dm&#39;</span><span class="p">],</span>\
+                <span class="s1">&#39;Not a Valid Personality&#39;</span>
+            <span class="k">if</span> <span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">person</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">iferror</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="random_incrementor"><a class="viewcode-back" href="../_rst/ComputerConversation.html#ComputerConversation.random_incrementor">[docs]</a><span class="k">def</span> <span class="nf">random_incrementor</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes the user response to the second_query and increments it</span>
+<span class="sd">    by a random value.</span>
+
+<span class="sd">    :parameter: **resp** an integer response value as a string</span>
+<span class="sd">    :returns: **string** value incremented by a random integer amount</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">number_input</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">number_input</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;I&#39;m sorry, I did not catch your number, please say again: &quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pythagorean_chest"><a class="viewcode-back" href="../_rst/ComputerConversation.html#ComputerConversation.pythagorean_chest">[docs]</a><span class="k">def</span> <span class="nf">pythagorean_chest</span><span class="p">(</span><span class="n">combination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The function takes the user response to the &quot;dm&quot; personality second_query,</span>
+<span class="sd">    a string value consisting of three integers that represent the users attempt</span>
+<span class="sd">    at unlocking the chest and determines if the user entered a pythagorean triple.</span>
+<span class="sd">    The function returns the outcome of the calculation and the dungeon master&#39;s</span>
+<span class="sd">    response.</span>
+
+<span class="sd">    :parameter: **combination** String representing 3 integers. Ex: &quot;123&quot;</span>
+<span class="sd">    :returns: **string** Dungeon Master&#39;s response</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="s1">&#39;Well done. You have opened the chest without setting off the trap. &#39;</span>
+    <span class="n">failure</span> <span class="o">=</span> <span class="s1">&#39;To your dismay, the chest remains locked and you begin to see a &#39;</span> \
+              <span class="s1">&#39;green gas begin to leech out of its sides.&#39;</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">999</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+            <span class="n">num_a</span><span class="p">,</span> <span class="n">num_b</span><span class="p">,</span> <span class="n">num_c</span> <span class="o">=</span> <span class="n">combination</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_c</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">solved_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;^2 + &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_b</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;^2 = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_c</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;^2&quot;</span>
+                <span class="k">return</span> <span class="n">success</span> <span class="o">+</span> <span class="n">solved_value</span> <span class="o">+</span> <span class="s2">&quot; is the correct Pythagorean Triple. You &quot;</span> \
+                                                <span class="s2">&quot;have earned &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_c</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; gold pieces.&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">failure</span> <span class="o">+</span> <span class="s2">&quot; You have &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_c</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; seconds to escape.&quot;</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">combination</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;You must enter a positive three digit number corresponding &#39;</span>
+                                <span class="s1">&#39;to the settings of the dials to open the lock: &#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fourth_response"><a class="viewcode-back" href="../_rst/ComputerConversation.html#ComputerConversation.fourth_response">[docs]</a><span class="k">def</span> <span class="nf">fourth_response</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">answer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes in two strings. One representing a specific personality</span>
+<span class="sd">    to represent and the second is an answer to a yes/no question. The function</span>
+<span class="sd">    returns a response based on the combination of personality and yes/no answer.</span>
+
+<span class="sd">    :parameter: **person** string, valid values are &#39;alien&#39;, &#39;country&#39;, &#39;surfer&#39;, &#39;dm&#39;</span>
+<span class="sd">    :parameter: **answer** Input from the user, valid values are &#39;yes&#39; and &#39;no&#39;</span>
+<span class="sd">    :returns: **string** response based on personality and yes/no answer</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;I am glad you said yes. I promise the probing will not take long.&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s2">&quot;Yee hah! I am glad you said yes buckaroo. Let&#39;s ride!&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;Totally tubular! Yes it is then! Let us catch a wave!&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;The wizard sees the good in you, heals you of any ailments,&#39;</span>
+                      <span class="s1">&#39;and gives you a renown sword of fabulous beauty.&#39;</span>
+            <span class="p">},</span>
+        <span class="s1">&#39;no&#39;</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;alien&#39;</span><span class="p">:</span> <span class="s1">&#39;Puny human, while no is understandable, it is not an option.&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;I am saddened by your no, but I understand. Happy Trails buckaroo.&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;surfer&#39;</span><span class="p">:</span> <span class="s1">&#39;Bummer. Sorry to here the no. Perhaps we can share a wave another time.&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;dm&#39;</span><span class="p">:</span> <span class="s1">&#39;The wizard sees the good in you, heals you of any ailments,&#39;</span>
+                      <span class="s1">&#39;and proceeds to tell you that you are a key character in a prophecy.&#39;</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">person</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;alien&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;surfer&#39;</span><span class="p">,</span> <span class="s1">&#39;dm&#39;</span><span class="p">],</span>\
+                <span class="s1">&#39;Not a Valid Personality&#39;</span>
+            <span class="k">if</span> <span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">resp</span><span class="p">[</span><span class="n">answer</span><span class="o">.</span><span class="n">lower</span><span class="p">()][</span><span class="n">person</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Did you say yes or no: &quot;</span><span class="p">)</span></div>
+
+
+<span class="c1"># Main</span>
+<span class="n">personality</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;alien&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;surfer&#39;</span><span class="p">,</span> <span class="s1">&#39;dm&#39;</span><span class="p">])</span>
+
+<span class="c1"># Initial Greeting and Response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">GREETINGS</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="n">validated_response</span> <span class="o">=</span> <span class="n">input_validator</span><span class="p">(</span><span class="n">personality</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;north&#39;</span><span class="p">,</span> <span class="s1">&#39;south&#39;</span><span class="p">,</span> <span class="s1">&#39;east&#39;</span><span class="p">,</span> <span class="s1">&#39;west&#39;</span><span class="p">],</span>
+                                     <span class="s1">&#39;I do not understand, please restate &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validated_response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">FIRST_RESPONSE</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Second Query and Response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">SECOND_QUERY</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">personality</span> <span class="o">!=</span> <span class="s1">&#39;dm&#39;</span><span class="p">:</span>
+    <span class="n">incremented_years</span> <span class="o">=</span> <span class="n">random_incrementor</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">incremented_years</span> <span class="o">+</span> <span class="n">SECOND_RESPONSE</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pythagorean_chest</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+
+<span class="c1"># Third Query and Response</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">THIRD_QUERY</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="n">validated_response</span> <span class="o">=</span> <span class="n">input_validator</span><span class="p">(</span><span class="n">personality</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;happy&#39;</span><span class="p">,</span> <span class="s1">&#39;sad&#39;</span><span class="p">],</span>
+                                     <span class="s1">&#39;I am sorry, did you say you were happy or sad: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validated_response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">THIRD_RESPONSE</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Fourth Query and Response</span>
+<span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">FOURTH_QUERY</span><span class="p">[</span><span class="n">personality</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourth_response</span><span class="p">(</span><span class="n">personality</span><span class="p">,</span> <span class="n">response</span><span class="p">))</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ComputerConversation 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Craig Smith.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

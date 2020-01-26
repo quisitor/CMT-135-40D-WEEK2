@@ -1,0 +1,7 @@
+ComputerConversation module
+===========================
+
+.. automodule:: ComputerConversation
+   :members:
+   :undoc-members:
+   :show-inheritance:

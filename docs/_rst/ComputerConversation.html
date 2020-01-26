@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>ComputerConversation module &#8212; ComputerConversation 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ComputerConversation 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ComputerConversation">
+<span id="computerconversation-module"></span><h1>ComputerConversation module<a class="headerlink" href="#module-ComputerConversation" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Student</dt>
+<dd class="field-odd"><p>Craig Smith</p>
+</dd>
+<dt class="field-even">Week-2</dt>
+<dd class="field-even"><p>Conversation with a Computer Assignment</p>
+</dd>
+<dt class="field-odd">Course</dt>
+<dd class="field-odd"><p>CMIT-135-40D (Champlain College)</p>
+</dd>
+<dt class="field-even">Professor</dt>
+<dd class="field-even"><p>Steve Giles</p>
+</dd>
+</dl>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>This module generates an interactive computer-driven conversation utilizing
+one of four random personalities and basic user terminal input.</p>
+</div>
+<div class="section" id="constraints">
+<h2>Constraints<a class="headerlink" href="#constraints" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Minimum of 4 unique inputs from the user</p></li>
+<li><p>Inputs must consist of numeric and alphanumeric responses</p></li>
+<li><p>The conversation-bot must utilize 3 of the user inputs as part of its responses</p></li>
+<li><p>The bot must perform some type of arithmetic operation on the inputs</p></li>
+<li><p>The program must include explanatory comments</p></li>
+<li><p>Student must turn in the .py file and a screenshot of the application in use</p></li>
+</ol>
+<dl class="function">
+<dt id="ComputerConversation.fourth_response">
+<code class="sig-prename descclassname">ComputerConversation.</code><code class="sig-name descname">fourth_response</code><span class="sig-paren">(</span><em class="sig-param">person</em>, <em class="sig-param">answer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ComputerConversation.html#fourth_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ComputerConversation.fourth_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes in two strings. One representing a specific personality
+to represent and the second is an answer to a yes/no question. The function
+returns a response based on the combination of personality and yes/no answer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>person</strong> string, valid values are ‘alien’, ‘country’, ‘surfer’, ‘dm’</p>
+</dd>
+<dt class="field-even">Parameter</dt>
+<dd class="field-even"><p><strong>answer</strong> Input from the user, valid values are ‘yes’ and ‘no’</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>string</strong> response based on personality and yes/no answer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ComputerConversation.input_validator">
+<code class="sig-prename descclassname">ComputerConversation.</code><code class="sig-name descname">input_validator</code><span class="sig-paren">(</span><em class="sig-param">person</em>, <em class="sig-param">answer</em>, <em class="sig-param">choices</em>, <em class="sig-param">iferror</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ComputerConversation.html#input_validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ComputerConversation.input_validator" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes the user response and chosen personality to and for the
+first_query and validates the user input against the choices list. The function
+will prompt the user for the correct input with the message in the “iferror”
+until the user returns a correct answer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>person</strong> string, valid values are ‘alien’, ‘country’, ‘surfer’, ‘dm’</p>
+</dd>
+<dt class="field-even">Parameter</dt>
+<dd class="field-even"><p><strong>answer</strong> String representing the user response to the query</p>
+</dd>
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>choices</strong> list of acceptable strings to compare to the answer</p>
+</dd>
+<dt class="field-even">Parameter</dt>
+<dd class="field-even"><p><strong>iferror</strong> string to prompt the user for correct input</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>list</strong> list containing the validated answer and personality</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ComputerConversation.pythagorean_chest">
+<code class="sig-prename descclassname">ComputerConversation.</code><code class="sig-name descname">pythagorean_chest</code><span class="sig-paren">(</span><em class="sig-param">combination</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ComputerConversation.html#pythagorean_chest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ComputerConversation.pythagorean_chest" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function takes the user response to the “dm” personality second_query,
+a string value consisting of three integers that represent the users attempt
+at unlocking the chest and determines if the user entered a pythagorean triple.
+The function returns the outcome of the calculation and the dungeon master’s
+response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>combination</strong> String representing 3 integers. Ex: “123”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>string</strong> Dungeon Master’s response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="ComputerConversation.random_incrementor">
+<code class="sig-prename descclassname">ComputerConversation.</code><code class="sig-name descname">random_incrementor</code><span class="sig-paren">(</span><em class="sig-param">resp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ComputerConversation.html#random_incrementor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ComputerConversation.random_incrementor" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes the user response to the second_query and increments it
+by a random value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameter</dt>
+<dd class="field-odd"><p><strong>resp</strong> an integer response value as a string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>string</strong> value incremented by a random integer amount</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ComputerConversation module</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#constraints">Constraints</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_rst/ComputerConversation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ComputerConversation 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Craig Smith.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>
